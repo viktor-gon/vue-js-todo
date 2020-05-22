@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">    
+  <div class="hello">
     <ul>
       <li v-for="(item, index) in items" :key="item.id">
         <Tile :item="item" :status="index" />
@@ -31,5 +31,8 @@ export default {
 <style scoped lang="scss">
 ul {
   list-style: none;
+  li {
+    margin-bottom: 10px;
+  }
 }
 </style>

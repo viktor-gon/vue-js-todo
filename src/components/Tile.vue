@@ -1,15 +1,22 @@
 <template>
   <div class="tile">
-    <h3>{{ item.title }}</h3>
-    <p>{{ item.body }}</p>
+    <h2>{{ item.text }}</h2>
+    <StatusExplanation :code="item.code" />
+    <ChangeStatus :item="item" :group="`Group${item.id}`" />
   </div>
 </template>
 
 <script>
 import { TodoItem } from '@/models/todo-item';
+import ChangeStatus from '@/components/ChangeStatus';
+import StatusExplanation from '@/components/StatusExplanation';
 
 export default {
   name: 'Tile',
+  components: {
+    ChangeStatus,
+    StatusExplanation,
+  },
   props: {
     item: TodoItem,
   },
