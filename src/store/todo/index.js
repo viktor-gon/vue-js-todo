@@ -5,7 +5,7 @@ import todo100 from '@/data/todo100';
 export const todo = {
   state: () => ({ items: [] }),
   mutations: {
-    initTodo(state, items) {
+    initTodoItems(state, items) {
       state.items = items;
     },
     updateTodoStatus(state, { id, code }) {
@@ -21,7 +21,7 @@ export const todo = {
     async fetchData({ commit }) {
       const data = await loadData();
       commit(
-        'initTodo',
+        'initTodoItems',
         data.map(item => new TodoItem(todo100[item]))
       );
     },

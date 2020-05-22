@@ -2,9 +2,15 @@
 // For example code 'BREAKING' should lead to StatusExplanation/Types/StatusBreaking.vue component
 // It was done to follow open-close SOLID principle...
 export const StatusCodes = {
-  new: 'NEW',
-  done: 'DONE',
-  forget: 'FORGET',
+  new: 'New',
+  done: 'Done',
+  forget: 'Forget',
+};
+
+export const getStatusPriorityByCode = {
+  [StatusCodes.new]: 0,
+  [StatusCodes.done]: 1,
+  [StatusCodes.forget]: 2,
 };
 
 const getStatusNameByCode = {

@@ -1,15 +1,16 @@
 <template>
   <div class="hello">
-    <ul>
-      <li v-for="(item, index) in items" :key="item.id">
-        <Tile :item="item" :status="index" />
+    <transition-group name="flip-list" tag="ul">
+      <li v-for="item in todoItems" :key="item.id">
+        <Tile :item="item" />
       </li>
-    </ul>
+    </transition-group>
   </div>
 </template>
 
 <script>
 import Tile from '@/components/Tile';
+import { getStatusPriorityByCode } from '@/models/status';
 
 export default {
   name: 'HelloWorld',
@@ -20,8 +21,12 @@ export default {
     this.$store.dispatch('fetchData');
   },
   computed: {
-    items() {
-      return this.$store.state.todo.items;
+    todoItems() {
+      const items = this.$store.state.todo.items.slice(0);
+      return items.sort(
+        (a, b) =>
+          getStatusPriorityByCode[a.code] - getStatusPriorityByCode[b.code]
+      );
     },
   },
 };
@@ -34,5 +39,8 @@ ul {
   li {
     margin-bottom: 10px;
   }
+}
+.flip-list-move {
+  transition: transform 1.5s;
 }
 </style>
