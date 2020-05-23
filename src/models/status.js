@@ -13,7 +13,7 @@ export const getStatusPriorityByCode = {
   [StatusCodes.forget]: 2,
 };
 
-const getStatusNameByCode = {
+export const getStatusNameByCode = {
   [StatusCodes.new]: 'Новое',
   [StatusCodes.done]: 'Сделано',
   [StatusCodes.forget]: 'Удалить',

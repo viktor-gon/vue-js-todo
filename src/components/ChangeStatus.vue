@@ -3,29 +3,33 @@
     <toggle-switch
       :options="myOptions"
       @change="updateMap($event.value)"
+      v-model="selectedValue"
       :group="group"
     />
   </div>
 </template>
 
 <script>
-import { statusLabels, getStatusByName } from '@/models/status';
+import { statusLabels, getStatusByName, TodoStatusMap } from '@/models/status';
 
 export default {
   name: 'ChangeStatus',
   props: {
     group: String,
-    item: Object,
+    itemId: Number,
+    statusCode: String,
+    hasError: Boolean,
   },
   data: function() {
     return {
+      selectedValue: this.statusName(),
       myOptions: {
         size: {
           width: 25,
         },
         items: {
           delay: 0.4,
-          preSelected: this.item.status,
+          preSelected: this.statusName(),
           disabled: false,
           labels: statusLabels,
         },
@@ -33,25 +37,38 @@ export default {
     };
   },
   watch: {
-    'item.code': function() {
+    hasError: function() {
+      if (!this.hasError) {
+        this.selectedValue = this.statusName();
+        this.unlockToggler(true);
+      }
+    },
+    statusCode: function() {
       // unlock toggler
-      this.myOptions = { ...this.myOptions, items: { disabled: false } };
+      this.unlockToggler(true);
     },
   },
   methods: {
+    statusName() {
+      return (TodoStatusMap[this.statusCode] && TodoStatusMap[this.statusCode].name) || 'Неизвестное';
+    },
+    unlockToggler(unlock) {
+      this.myOptions = { ...this.myOptions, items: { disabled: !unlock } };
+    },
     updateMap(value) {
       const status = getStatusByName(value);
-      if (status.code === this.item.code) {
+      if (status.name === this.statusName()) {
         return;
       }
 
       // lock toggler
-      this.myOptions = { ...this.myOptions, items: { disabled: true } };
+      this.unlockToggler(false);
 
+      // this.selectedValue = this.item.status;
       // update data
       this.$store.dispatch('updateTodoStatus', {
         status,
-        id: this.item.id,
+        id: this.itemId,
       });
     },
   },

@@ -1,8 +1,14 @@
 <template>
   <div class="tile">
-    <h2>{{ item.text }}</h2>
-    <StatusExplanation :code="item.code" />
-    <ChangeStatus :item="item" :group="`Group${item.id}`" />
+    <h2>{{ item.title }}</h2>
+    <h3 v-if="hasError">Произошла ошибка</h3>
+    <StatusExplanation v-else :code="item.code" />
+    <ChangeStatus
+      :itemId="item.id"
+      :statusCode="item.code"
+      :group="`Group${item.id}`"
+      :hasError="hasError"
+    />
   </div>
 </template>
 
@@ -20,6 +26,11 @@ export default {
   props: {
     item: TodoItem,
   },
+  computed: {
+    hasError() {
+      return !!this.$store.state.todo.errors[this.item.id];
+    },
+  },
 };
 </script>
 
@@ -28,5 +39,6 @@ export default {
   border: 1px solid gray;
   border-radius: 5px;
   background: lightgray;
+  padding-bottom: 15px;
 }
 </style>
