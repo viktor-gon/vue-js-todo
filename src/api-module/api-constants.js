@@ -1,4 +1,4 @@
-export const BASE_API_URL = 'https://www.random.org';
+export const BASE_API_URL = 'http://jsonplaceholder.typicode.com';
 
 import { FetchProvider } from '@/api-module/api-providers/provider-fetch';
 import { AxiosProvider } from '@/api-module/api-providers/provider-axios';

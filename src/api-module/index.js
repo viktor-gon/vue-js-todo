@@ -7,29 +7,21 @@ import { ApiProvider } from '@/api-module/api-constants';
 // Any other api client may be also used by implementing
 // coresponding provider and adding it's reference into api-constants
 
-const api = new Api(ApiProvider.localStorage);
+const api = new Api(ApiProvider.fetch);
 
 const getData = async () => {
-  // https://www.random.org/strings/?num=10&len=2&digits=on&upperalpha=off&loweralpha=off&unique=on&format=plain&rnd=new
-  // Make real request to get random numbers!!!
-  // and use as indexes of our hardcoded data:
-  const data = await api.getData(
-    '/strings/?num=10&len=2&digits=on&upperalpha=off&loweralpha=off&unique=on&format=plain&rnd=new'
-  );
-  console.log(data);
+  const data = await api.getData('/todos');
 
   if (!data) {
     return data;
   }
 
-  //const result = data.split('\n').map(item => parseInt(item, 10));
-  //result.pop();
   return data;
 };
 
 const putData = async (id, data) => {
   try {
-    const updatedCode = await api.putData(id, data);
+    const updatedCode = await api.putData(id, data);   
     return updatedCode;
   } catch (err) {
     console.error(err);

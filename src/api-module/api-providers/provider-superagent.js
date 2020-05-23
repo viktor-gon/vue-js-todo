@@ -8,7 +8,7 @@ class SuperagentProvider extends IBaseApi {
   }
 
   async getData(params) {
-    return (await superagent.get(`${this.baseUrl}${params}`)).text;
+    return JSON.parse((await superagent.get(`${this.baseUrl}${params}`)).text);
   }
 
   async putData(data) {

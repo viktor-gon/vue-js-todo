@@ -24,6 +24,10 @@ class Api extends IBaseApi {
   async postData(data) {
     return await this.provider.postData(data);
   }
+
+  async deleteData(id) {
+    return await this.provider.deleteData(id);
+  }
 }
 
 export { Api };

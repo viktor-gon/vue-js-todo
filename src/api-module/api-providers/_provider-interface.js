@@ -3,14 +3,23 @@
 class IBaseApi {
   constructor(baseUrl) {
     this.baseUrl = baseUrl;
+    this.message = 'This method should be implemented in child class';
   }
-
+  
   async getData(params) {
-    console.error('This method should be implemented in child class', params);
+    console.error(this.message, params);
   }
 
-  async putData(data) {
-    console.error('This method should be implemented in child class', data);
+  async putData(id, data) {
+    console.error(this.message, id, data);
+  }
+
+  async postData(data) {
+    console.error(this.message, data);
+  }
+
+  async deleteData(id) {
+    console.error(this.message, id);
   }
 }
 

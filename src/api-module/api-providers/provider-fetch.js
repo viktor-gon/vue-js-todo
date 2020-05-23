@@ -8,13 +8,20 @@ class FetchProvider extends IBaseApi {
   }
 
   async getData(params) {
-    return (await fetch(`${this.baseUrl}${params}`)).text();
+    return (await fetch(`${this.baseUrl}${params}`)).json();
   }
 
   async putData(data) {
     // Actually this method is not fully implemented
     // because we do not have server for this example
-    return fetch(this.baseUrl, { method: 'PUT', body: JSON.stringify(data) });
+    const response = fetch(this.baseUrl, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) {
+      throw 'Bad fetch request';
+    }
+    return response;
   }
 }
 
