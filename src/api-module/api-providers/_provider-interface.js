@@ -5,7 +5,7 @@ class IBaseApi {
     this.baseUrl = baseUrl;
     this.message = 'This method should be implemented in child class';
   }
-  
+
   async getData(params) {
     console.error(this.message, params);
   }

@@ -7,7 +7,12 @@ import { ApiProvider } from '@/api-module/api-constants';
 // Any other api client may be also used by implementing
 // coresponding provider and adding it's reference into api-constants
 
-const api = new Api(ApiProvider.fetch);
+const api = new Api(ApiProvider.localStorage);
+
+// Available providers:
+// const api = new Api(ApiProvider.fetch);
+// const api = new Api(ApiProvider.axios);
+// const api = new Api(ApiProvider.superagent);
 
 const getData = async () => {
   const data = await api.getData('/todos');
@@ -21,7 +26,7 @@ const getData = async () => {
 
 const putData = async (id, data) => {
   try {
-    const updatedCode = await api.putData(id, data);   
+    const updatedCode = await api.putData(id, data);
     return updatedCode;
   } catch (err) {
     console.error(err);
@@ -39,4 +44,14 @@ const postData = async data => {
   return undefined;
 };
 
-export { getData, putData, postData };
+const deleteData = async data => {
+  try {
+    const createdId = await api.deleteData(data);
+    return createdId;
+  } catch (err) {
+    console.error(err);
+  }
+  return undefined;
+};
+
+export { getData, putData, postData, deleteData };
