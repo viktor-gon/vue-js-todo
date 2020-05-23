@@ -1,11 +1,11 @@
 <template>
-  <h3 class="status-wrapper">
+  <h3 class="error-wrapper">
     <slot></slot>
   </h3>
 </template>
 
 <style lang="scss">
-.status-wrapper {
-  color: green;
+.error-wrapper {
+  color: red;
 }
 </style>

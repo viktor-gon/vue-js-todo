@@ -16,7 +16,7 @@ export const getStatusPriorityByCode = {
 export const getStatusNameByCode = {
   [StatusCodes.new]: 'Новое',
   [StatusCodes.done]: 'Сделано',
-  [StatusCodes.forget]: 'Удалить',
+  [StatusCodes.forget]: 'Забыть',
 };
 
 function TodoStatus(code, color, background) {
