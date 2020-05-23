@@ -15,13 +15,12 @@ const api = new Api(ApiProvider.localStorage);
 // const api = new Api(ApiProvider.superagent);
 
 const getData = async () => {
-  const data = await api.getData('/todos');
-
-  if (!data) {
-    return data;
+  try {
+    return await api.getData('/todos');
+  } catch (err) {
+    console.error(err);
   }
-
-  return data;
+  return undefined;
 };
 
 const putData = async (id, data) => {
@@ -46,12 +45,12 @@ const postData = async data => {
 
 const deleteData = async data => {
   try {
-    const createdId = await api.deleteData(data);
-    return createdId;
+    await api.deleteData(data);
+    return true;
   } catch (err) {
     console.error(err);
   }
-  return undefined;
+  return false;
 };
 
 export { getData, putData, postData, deleteData };
