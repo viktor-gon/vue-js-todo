@@ -1,5 +1,5 @@
 <template>
-  <section :class="{ tile: true, odd: odd, deleted: deleted }">
+  <section :class="{ tile: true, odd, deleted }">
     <h2>{{ item.title }}</h2>
     <Controls
       class="controls"
