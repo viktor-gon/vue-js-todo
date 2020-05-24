@@ -44,6 +44,18 @@ class LocalStorageProvider extends IBaseApi {
     return createdId;
   }
 
+  async deleteData(id) {
+    const items = this.decodeData();
+    if (!items) {
+      return false;
+    }
+
+    const newItems = items.filter(item => item.id !== id);
+    localStorage.setItem(this.key, this.encodeData(newItems));
+    return true;
+  }
+
+  // Helper methods for this class
   decodeData() {
     const items = localStorage.getItem(this.key);
     if (!items) {

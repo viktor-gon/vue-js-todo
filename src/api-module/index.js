@@ -43,9 +43,9 @@ const postData = async data => {
   return undefined;
 };
 
-const deleteData = async data => {
+const deleteData = async id => {
   try {
-    await api.deleteData(data);
+    await api.deleteData(id);
     return true;
   } catch (err) {
     console.error(err);

@@ -10,7 +10,11 @@
 </template>
 
 <script>
-import { statusLabels, getStatusByName, TodoStatusMap } from '@/models/status';
+import {
+  statusLabels,
+  getStatusByName,
+  getStatusNameByCode,
+} from '@/models/status';
 
 export default {
   name: 'ChangeStatus',
@@ -50,7 +54,9 @@ export default {
   },
   methods: {
     statusName() {
-      return (TodoStatusMap[this.statusCode] && TodoStatusMap[this.statusCode].name) || 'Неизвестное';
+      return (
+        getStatusNameByCode[this.statusCode] || getStatusNameByCode.unknown
+      );
     },
     unlockToggler(unlock) {
       this.myOptions = { ...this.myOptions, items: { disabled: !unlock } };
@@ -64,7 +70,6 @@ export default {
       // lock toggler
       this.unlockToggler(false);
 
-      // this.selectedValue = this.item.status;
       // update data
       this.$store.dispatch('updateTodoStatus', {
         status,

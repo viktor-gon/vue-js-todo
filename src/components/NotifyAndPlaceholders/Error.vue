@@ -4,7 +4,7 @@
   </h3>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 .error-wrapper {
   color: red;
 }

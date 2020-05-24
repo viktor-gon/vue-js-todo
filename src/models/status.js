@@ -17,6 +17,7 @@ export const getStatusNameByCode = {
   [StatusCodes.new]: 'Новое',
   [StatusCodes.done]: 'Сделано',
   [StatusCodes.forget]: 'Забыть',
+  unknown: 'Неизвестно',
 };
 
 function TodoStatus(code, color, background) {

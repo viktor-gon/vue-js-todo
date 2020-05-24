@@ -4,14 +4,14 @@
     <NoData v-else-if="haveEmptyItems" />
     <transition-group v-else name="flip-list" tag="ul">
       <li v-for="item in todoItems" :key="item.id">
-        <Tile :item="item" />
+        <TodoTile :item="item" />
       </li>
     </transition-group>
   </div>
 </template>
 
 <script>
-import Tile from '@/components/Tile';
+import TodoTile from '@/components/TodoTile';
 import Preloader from '@/components/NotifyAndPlaceholders/Preloader';
 import NoData from '@/components/NotifyAndPlaceholders/NoData';
 
@@ -20,7 +20,7 @@ import { getStatusPriorityByCode } from '@/models/status';
 export default {
   name: 'TodoList',
   components: {
-    Tile,
+    TodoTile,
     Preloader,
     NoData,
   },
@@ -37,10 +37,11 @@ export default {
     },
     todoItems() {
       const items = this.$store.state.todo.items.slice(0);
-      return items.sort(
-        (a, b) =>
-          getStatusPriorityByCode[a.code] - getStatusPriorityByCode[b.code]
-      );
+      return items.sort((a, b) => {
+        const diff =
+          getStatusPriorityByCode[a.code] - getStatusPriorityByCode[b.code];
+        return diff ? diff : a.id - b.id;
+      });
     },
   },
 };

@@ -16,7 +16,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 button {
   min-height: 40px;
   font-weight: bold;
