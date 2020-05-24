@@ -6,7 +6,7 @@
       </button>
     </li>
     <li>
-      <button title="Delete" @click="deleteClick">
+      <button class="delete" title="Delete" @click="deleteClick">
         <img :src="iconsDelete" alt="Delete" />
       </button>
     </li>
