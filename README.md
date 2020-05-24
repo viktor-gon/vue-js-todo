@@ -1,4 +1,4 @@
-# vue-todo2
+# vue-todo application with SOLID principles
 
 ## Project setup
 ```
