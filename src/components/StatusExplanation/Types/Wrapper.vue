@@ -5,7 +5,9 @@
 </template>
 
 <style lang="scss">
+@import '@/styles/global';
+
 .status-wrapper {
-  color: green;
+  color: $statusColor;
 }
 </style>

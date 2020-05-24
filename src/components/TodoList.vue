@@ -3,8 +3,8 @@
     <Preloader v-if="!haveItems" />
     <NoData v-else-if="haveEmptyItems" />
     <transition-group v-else name="flip-list" tag="ul">
-      <li v-for="item in todoItems" :key="item.id">
-        <TodoTile :item="item" />
+      <li v-for="(item, index) in todoItems" :key="item.id">
+        <TodoTile :item="item" :odd="index % 2" />
       </li>
     </transition-group>
   </div>
@@ -51,9 +51,11 @@ export default {
 <style scoped lang="scss">
 .todolist {
   ul {
+    padding: 0;
     list-style: none;
     li {
       margin-bottom: 10px;
+      padding: 0;
     }
   }
   .flip-list-move {

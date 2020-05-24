@@ -1,5 +1,5 @@
 <template>
-  <section class="tile">
+  <section :class="{ tile: true, odd: odd, deleted: deleted }">
     <h2>{{ item.title }}</h2>
     <Controls
       class="controls"
@@ -41,16 +41,26 @@ export default {
   },
   props: {
     item: TodoItem,
+    odd: Number,
   },
   data: function() {
-    return { isExpandedManually: false };
+    return {
+      isExpandedManually: false,
+      deleted: false,
+    };
   },
   methods: {
     expandHandler() {
       this.isExpandedManually = !this.isExpandedManually;
     },
     deleteHandler() {
-      this.$store.dispatch('deleteTodoItem', { id: this.item.id });
+      // start animation
+      this.deleted = true;
+
+      // really delete item in 500 ms
+      setTimeout(() => {
+        this.$store.dispatch('deleteTodoItem', { id: this.item.id });
+      }, 500);
     },
   },
   computed: {
@@ -68,14 +78,22 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/styles/global';
+
 .tile {
   position: relative;
   border: 1px solid gray;
   border-radius: 5px;
-  background: lightgray;
+  background: $primaryColor;
+  color: $textColor;
   padding: 15px;
   max-width: 600px;
   margin: 0 auto;
+
+  &.odd {
+    background: $primaryColorDark;
+    color: $textColorDark;
+  }
 
   transition: all 1.5s;
   h2 {
@@ -87,6 +105,12 @@ export default {
   position: absolute;
   top: 5px;
   right: 10px;
+}
+
+.deleted {
+  transition: opacity transform 0.5s;
+  opacity: 0;
+  transform: translateX(-200px);
 }
 
 .fade-enter-active,

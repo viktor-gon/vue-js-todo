@@ -5,7 +5,9 @@
 </template>
 
 <style scoped lang="scss">
+@import '@/styles/global';
+
 .error-wrapper {
-  color: red;
+  color: $errorColor;
 }
 </style>
